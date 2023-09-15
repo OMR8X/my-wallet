@@ -1,0 +1,8 @@
+abstract class TransactionsRepository {
+  getLatestTransactions();
+  // 
+  // 
+  // 
+  // 
+  
+}
