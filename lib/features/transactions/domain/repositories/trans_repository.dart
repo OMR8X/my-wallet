@@ -1,8 +1,3 @@
 abstract class TransactionsRepository {
   getLatestTransactions();
-  // 
-  // 
-  // 
-  // 
-  
 }
