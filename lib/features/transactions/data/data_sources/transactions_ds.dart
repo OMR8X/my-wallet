@@ -37,8 +37,6 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     throw UnimplementedError();
   }
   
-
-  
   @override
   Future<(double, double)> getExpensesAndIncomeAmount() {
     throw UnimplementedError();

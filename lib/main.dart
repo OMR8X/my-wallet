@@ -21,12 +21,10 @@ class HomeScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Column(
-      children: [
-        Text("")
-      ],
-    ),
+    return const Scaffold(
+      body: Column(
+        children: [Text("")],
+      ),
     );
   }
 }

@@ -1,10 +1,9 @@
 import '../repositories/trans_repository.dart';
 import '../entities/transaction.dart';
 
-class GetRecentTranactionsUS {
+class GetRecentTransactionsUS {
   final TransactionsRepository repository;
-
-  GetRecentTranactionsUS(this.repository);
+  GetRecentTransactionsUS(this.repository);
   Future<List<Transaction>> call() async {
     return await repository.getRecentTransactions();
   }
