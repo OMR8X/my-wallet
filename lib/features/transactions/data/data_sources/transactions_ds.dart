@@ -11,55 +11,57 @@ abstract class TransactionDataSource {
   Future<(double, double)> getExpensesAndIncomeAmount();
   // Adders
   Future<void> addIncome(Income i);
-  Future<void> addExpence(Expense e);
+  Future<void> addExpense(Expense e);
   // updaters
   Future<void> updateTransaction(Transaction t);
-  //Deleters
+  //Deletes
   Future<void> deleteTransaction(Transaction t);
 }
 
 class TransactionDataSourceImpl implements TransactionDataSource {
   final sqflite.Database database;
+  final String s1="",s2="";
   TransactionDataSourceImpl({required this.database});
   
   @override
-  Future<void> addExpence(e) {
+  Future<void> addExpense(e) async{
+    await database.rawQuery("sql");
     throw UnimplementedError();
   }
   
   @override
-  Future<void> addIncome(i) {
+  Future<void> addIncome(i) async{
     throw UnimplementedError();
   }
   
   @override
-  Future<void> deleteTransaction(Transaction t) {
+  Future<void> deleteTransaction(Transaction t) async{
     throw UnimplementedError();
   }
   
   @override
-  Future<(double, double)> getExpensesAndIncomeAmount() {
+  Future<(double, double)> getExpensesAndIncomeAmount() async{
     throw UnimplementedError();
   }
   
   @override
-  Future<List<Transaction>> getRecentTransactions() {
+  Future<List<Transaction>> getRecentTransactions() async{
     throw UnimplementedError();
   }
   
   @override
-  Future<void> updateTransaction(Transaction t) {
+  Future<void> updateTransaction(Transaction t) async{
     throw UnimplementedError();
   }
   
   @override
-  Future<List<Expense>> getAllExpenses() {
+  Future<List<Expense>> getAllExpenses() async{
     // TODO: implement getAllExpenses
     throw UnimplementedError();
   }
   
   @override
-  Future<List<Income>> getAllIncomes() {
+  Future<List<Income>> getAllIncomes() async{
     // TODO: implement getAllIncomes
     throw UnimplementedError();
   }

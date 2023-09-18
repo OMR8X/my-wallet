@@ -10,7 +10,7 @@ abstract class TransactionsRepository {
   Future<(double, double)> getExpensesAndIncomeAmount();
   // Adders
   Future<void> addIncome(Income i);
-  Future<void> addExpence(Expense e);
+  Future<void> addExpense(Expense e);
   // updaters
   Future<void> updateTransaction(Transaction t);
   //Deleters

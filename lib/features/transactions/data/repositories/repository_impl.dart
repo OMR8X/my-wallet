@@ -9,8 +9,8 @@ class TransactionsRepositoryImple implements TransactionsRepository {
   final TransactionDataSource dataSource;
   TransactionsRepositoryImple({required this.dataSource});
   @override
-  Future<void> addExpence(Expense e) async {
-    return await dataSource.addExpence(e);
+  Future<void> addExpense(Expense e) async {
+    return await dataSource.addExpense(e);
   }
 
   @override
