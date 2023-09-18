@@ -1,5 +1,4 @@
-import 'package:my_wallet/features/transactions/domain/repositories/trans_repository.dart';
-
+import '../repositories/trans_repository.dart';
 import '../entities/transaction.dart';
 
 class GetRecentTransactionsUS {
