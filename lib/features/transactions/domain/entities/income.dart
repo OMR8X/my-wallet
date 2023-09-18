@@ -2,6 +2,7 @@ import 'package:my_wallet/features/transactions/domain/entities/transaction.dart
 
 class Income extends Transaction {
   Income({
+    required super.id,
     required super.category,
     required super.transStyle,
     required super.date,

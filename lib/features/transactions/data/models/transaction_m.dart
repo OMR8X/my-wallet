@@ -1,18 +1,17 @@
+
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
-import 'package:my_wallet/features/transactions/domain/entities/income.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
-class IncomeModel extends Income {
-  IncomeModel({
-    required super.id,
+class TransactionModel extends Transaction {
+  TransactionModel({    required super.id,
     required super.category,
     required super.transStyle,
     required super.date,
     required super.details,
     required super.amount,
   });
-  factory IncomeModel.fromJson(Map json) {
-    return IncomeModel(
+  factory TransactionModel.fromJson(Map json) {
+    return TransactionModel(
       id: json["id"],
       category: json["category"],
       transStyle: getStyleByCategory(json["category"]),
@@ -21,17 +20,17 @@ class IncomeModel extends Income {
       amount: json["amount"],
     );
   }
-  factory IncomeModel.fromObject(Income i) {
-    return IncomeModel(
-      id: i.id,
-      category: i.category,
-      transStyle: getStyleByCategory(i.category),
-      date: i.date,
-      details: i.details,
-      amount: i.amount,
+  factory TransactionModel.fromObject(Transaction t) {
+    return TransactionModel(
+      id: t.id,
+      category: t.category,
+      transStyle: getStyleByCategory(t.category),
+      date: t.date,
+      details: t.details,
+      amount: t.amount,
     );
   }
-  toJson() {
+  Map toJson() {
     return {
       "id": id,
       "category": category,

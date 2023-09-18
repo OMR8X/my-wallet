@@ -1,8 +1,9 @@
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
+import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 class ExpenseModel extends Expense {
-  ExpenseModel({
+  ExpenseModel({  required super.id,
     required super.category,
     required super.transStyle,
     required super.date,
@@ -10,7 +11,7 @@ class ExpenseModel extends Expense {
     required super.amount,
   });
   factory ExpenseModel.fromJson(Map json) {
-    return ExpenseModel(
+    return ExpenseModel(      id: json["id"],
       category: json["category"],
       transStyle: getStyleByCategory(json["category"]),
       date: DateTime.parse(json["date"]),
@@ -18,8 +19,18 @@ class ExpenseModel extends Expense {
       amount: json["amount"],
     );
   }
-  toJson() {
-    return {
+  factory ExpenseModel.fromObject(Expense e) {
+    return ExpenseModel(      id: e.id,
+      category: e.category,
+      transStyle: getStyleByCategory(e.category),
+      date: e.date,
+      details: e.details,
+      amount: e.amount,
+    );
+  }
+
+ Map toJson() {
+    return {      "id": id,
       "category": category,
       "date": date.toString(),
       "details": details,
