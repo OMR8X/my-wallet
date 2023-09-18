@@ -1,11 +1,10 @@
 import 'package:my_wallet/features/transactions/domain/entities/income.dart';
 import 'package:my_wallet/features/transactions/domain/repositories/trans_repository.dart';
 
-class AddInomeUC{
+class AddIncomeUC {
   final TransactionsRepository repository;
-  AddInomeUC(this.repository);
-  Future<void> call(Income i)async{
+  AddIncomeUC(this.repository);
+  Future<void> call(Income i) async {
     return repository.addIncome(i);
   }
 }
-

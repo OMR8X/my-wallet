@@ -13,6 +13,6 @@ abstract class TransactionsRepository {
   Future<void> addExpense(Expense e);
   // updaters
   Future<void> updateTransaction(Transaction t);
-  //Deleters
+  //Deletes
   Future<void> deleteTransaction(Transaction t);
 }
