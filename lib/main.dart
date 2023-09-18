@@ -19,8 +19,14 @@ class MyWallet extends StatelessWidget {
 class HomeScreenView extends StatelessWidget {
   const HomeScreenView({super.key});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: const Column(
+      children: [
+        Text("")
+      ],
+    ),
+    );
   }
 }
