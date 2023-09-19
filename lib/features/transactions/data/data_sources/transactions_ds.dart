@@ -9,12 +9,13 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 abstract class TransactionDataSource {
   // Getters
   Future<List<Transaction>> getRecentTransactions();
+  Future<List<Transaction>> getLastTransactions();
   Future<List<Income>> getAllIncomes();
   Future<List<Expense>> getAllExpenses();
   Future<(double, double)> getExpensesAndIncomeAmount();
   // Adders
-  Future<void> addIncome(Income i);
-  Future<void> addExpense(Expense e);
+  Future<void> addTransaction(Transaction t);
+
   // updaters
   Future<void> updateTransaction(Transaction t);
   // Deletes
@@ -30,37 +31,45 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   Future<(double, double)> getExpensesAndIncomeAmount() async {
     double e = 0.0, i = 0.0;
     var transactions = await getRecentTransactions();
-    var expenses = transactions.where(
-      (element) => element.runtimeType == Expense,
-    );
-    var incomes = transactions.where(
-      (element) => element.runtimeType == Income,
-    );
-    for (var exp in expenses) {
-      e += exp.amount;
+    for (var t in transactions) {
+      if (t.runtimeType == Expense) {
+        e += t.amount;
+      } else {
+        i += t.amount;
+      }
     }
-    for (var inc in incomes) {
-      e += inc.amount;
-    }
-    return (e / expenses.length, i / incomes.length);
+    return (e, i);
   }
 
   @override
   Future<List<Transaction>> getRecentTransactions() async {
-    throw UnimplementedError();
+    int d, m, y;
+    d = DateTime.now().day;
+    m = DateTime.now().month;
+    y = DateTime.now().year;
+    List<Transaction> transactions = await getAllTransactions();
+    return transactions.where((element) {
+      if (element.date.year != y) return false;
+      if (element.date.month != m) return false;
+      if (element.date.day != d) return false;
+      return false;
+    }).toList();
   }
 
   @override
-  Future<void> addExpense(e) async {
-    var model = ExpenseModel.fromObject(e).toJson();
-    await database.insert(expensesTable, model as Map<String, Object?>);
-    return;
+  Future<List<Transaction>> getLastTransactions() async {
+    List<Transaction> transactions = await getAllTransactions();
+    if (transactions.length < 10) return transactions;
+    return transactions.sublist(transactions.length - 1, transactions.length);
   }
 
   @override
-  Future<void> addIncome(i) async {
-    var model = IncomeModel.fromObject(i).toJson();
-    await database.insert(incomesTable, model as Map<String, Object?>);
+  Future<void> addTransaction(t) async {
+    var model = TransactionModel.fromObject(t).toJson();
+    await database.insert(
+      t.runtimeType == Expense ? expensesTable : incomesTable,
+      model as Map<String, Object?>,
+    );
     return;
   }
 
@@ -95,8 +104,16 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<List<Income>> getAllIncomes() async {
     List<Map> models = await database.query(incomesTable);
-    List<Income> expenses = [];
-    expenses = models.map<Income>((e) => IncomeModel.fromJson(e)).toList();
-    return expenses;
+    List<Income> incomes = [];
+    incomes = models.map<Income>((e) => IncomeModel.fromJson(e)).toList();
+    return incomes;
+  }
+
+  Future<List<Transaction>> getAllTransactions() async {
+    List<Transaction> transactions = [];
+    transactions += await getAllExpenses();
+    transactions += await getAllIncomes();
+    transactions.sort((a, b) => a.date.compareTo(b.date));
+    return transactions;
   }
 }
