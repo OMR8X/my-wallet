@@ -27,6 +27,30 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   TransactionDataSourceImpl({required this.database});
 
   @override
+  Future<(double, double)> getExpensesAndIncomeAmount() async {
+    double e = 0.0, i = 0.0;
+    var transactions = await getRecentTransactions();
+    var expenses = transactions.where(
+      (element) => element.runtimeType == Expense,
+    );
+    var incomes = transactions.where(
+      (element) => element.runtimeType == Income,
+    );
+    for (var exp in expenses) {
+      e += exp.amount;
+    }
+    for (var inc in incomes) {
+      e += inc.amount;
+    }
+    return (e / expenses.length, i / incomes.length);
+  }
+
+  @override
+  Future<List<Transaction>> getRecentTransactions() async {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> addExpense(e) async {
     var model = ExpenseModel.fromObject(e).toJson();
     await database.insert(expensesTable, model as Map<String, Object?>);
@@ -44,20 +68,9 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   Future<void> deleteTransaction(Transaction t) async {
     await database.delete(
         t.runtimeType == Expense ? expensesTable : incomesTable,
-        where: "id = ? ",
+        where: "id = ?",
         whereArgs: [t.id]);
     return;
-  }
-
-  @override
-  Future<(double, double)> getExpensesAndIncomeAmount() async {
-    double e = 0.0, i = 0.0;
-    // logic
-    return (e, i);
-  }
-  @override
-  Future<List<Transaction>> getRecentTransactions() async {
-    throw UnimplementedError();
   }
 
   @override
@@ -66,15 +79,14 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     await database.update(
         t.runtimeType == Expense ? expensesTable : incomesTable,
         m as Map<String, Object?>,
-        where: "id = ? ",
+        where: "id = ?",
         whereArgs: [t.id]);
     return;
   }
 
   @override
   Future<List<Expense>> getAllExpenses() async {
-    String sql = '';
-    List<Map> models = await database.rawQuery(sql);
+    List<Map> models = await database.query(expensesTable);
     List<Expense> expenses = [];
     expenses = models.map<Expense>((e) => ExpenseModel.fromJson(e)).toList();
     return expenses;
@@ -82,8 +94,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   @override
   Future<List<Income>> getAllIncomes() async {
-    String sql = '';
-    List<Map> models = await database.rawQuery(sql);
+    List<Map> models = await database.query(incomesTable);
     List<Income> expenses = [];
     expenses = models.map<Income>((e) => IncomeModel.fromJson(e)).toList();
     return expenses;
