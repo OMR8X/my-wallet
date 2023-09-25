@@ -110,8 +110,9 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
                 final start = index * 5;
                 final end = (index + 1) * 5;
                 final sublist = items.sublist(
-                    start, end < items.length ? end : items.length);
-
+                  start,
+                  end < items.length ? end : items.length,
+                );
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: sublist,
