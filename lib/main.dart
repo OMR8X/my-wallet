@@ -16,9 +16,7 @@ class MyWallet extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: ColorsHelper.background,
         appBarTheme: const AppBarTheme(
-            backgroundColor: ColorsHelper.background,
-            elevation: 0.0,
-            iconTheme: IconThemeData(color: Colors.white)),
+            backgroundColor: ColorsHelper.background, elevation: 0.0),
       ),
       home: const HomeView(),
     );

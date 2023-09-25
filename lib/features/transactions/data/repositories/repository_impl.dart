@@ -5,9 +5,9 @@ import 'package:my_wallet/features/transactions/domain/repositories/trans_reposi
 
 import '../../domain/entities/transaction.dart';
 
-class TransactionsRepositoryImple implements TransactionsRepository {
+class TransactionsRepositoryImpel implements TransactionsRepository {
   final TransactionDataSource dataSource;
-  TransactionsRepositoryImple({required this.dataSource});
+  TransactionsRepositoryImpel({required this.dataSource});
   @override
   Future<void> addTransaction(Transaction t) async{
     return await dataSource.addTransaction(t);

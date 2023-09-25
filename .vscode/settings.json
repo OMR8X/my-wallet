@@ -2,11 +2,19 @@
     "cSpell.words": [
         "DFBC",
         "FFCC",
+<<<<<<< HEAD
         "indecators",
+=======
+<<<<<<< HEAD
+        "Imple",
+        "sqflite"
+=======
+>>>>>>> a008cad19099f5a0d083f0f96b34e4b680546877
         "sqflite",
         "sublist",
         "الرصيد",
         "الصرف",
         "الكلي"
+>>>>>>> 9a26814ca860a1838c24202ede8c63a829340ba3
     ]
 }
