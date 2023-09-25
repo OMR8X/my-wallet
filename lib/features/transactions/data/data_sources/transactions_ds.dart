@@ -52,7 +52,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
       if (element.date.year != y) return false;
       if (element.date.month != m) return false;
       if (element.date.day != d) return false;
-      return false;
+      return true;
     }).toList();
   }
 
@@ -60,7 +60,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   Future<List<Transaction>> getLastTransactions() async {
     List<Transaction> transactions = await getAllTransactions();
     if (transactions.length < 10) return transactions;
-    return transactions.sublist(transactions.length - 1, transactions.length);
+    return transactions.sublist(transactions.length - 10, transactions.length);
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SpacingHelper {
-  static const double unit = 2.0;
+  static const double unit = 4.0;
   // height spacers
   static SizedBox get h1 => const SizedBox(height: unit);
   static SizedBox get h2 => const SizedBox(height: unit * 2);

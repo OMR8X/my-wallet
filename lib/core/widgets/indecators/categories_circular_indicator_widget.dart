@@ -6,8 +6,8 @@ import 'package:my_wallet/features/transactions/domain/entities/transaction.dart
 
 class CategoriesCircularIndicatorWidget extends StatefulWidget {
   const CategoriesCircularIndicatorWidget(
-      {super.key, required this.size, required this.transaction});
-  final Size size;
+      {super.key, required this.transaction});
+
   // all transactions
   final List<Transaction> transaction;
   @override
@@ -21,8 +21,8 @@ class _CategoriesCircularIndicatorWidgetState
   double fullAmount = 0.0;
   // collect data
   Map<String, double> data = {};
-  // settings :
-  
+  // Widget size
+  Size? size;
   //
   void initData() {
     fullAmount = 0.0;
@@ -38,6 +38,10 @@ class _CategoriesCircularIndicatorWidgetState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       initData();
+      if (context.size != null) {
+        size = context.size!;
+        setState(() {});
+      }
     });
     super.initState();
   }
@@ -48,14 +52,17 @@ class _CategoriesCircularIndicatorWidgetState
       alignment: Alignment.center,
       children: [
         SizedBox(
-          width: min(widget.size.width, widget.size.height) / 2,
-          height: min(widget.size.width, widget.size.height) / 2,
+          width: size?.width,
+          height: size?.height,
           child: CustomPaint(
             painter: CategoriesCircularIndicatorPaint(
-                data: data, fullAmount: fullAmount),
+              data: data,
+              fullAmount: fullAmount,
+            ),
           ),
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               "الصرف الكلي",
@@ -81,7 +88,6 @@ class CategoriesCircularIndicatorPaint extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     double lastAngle = 0.0;
-
     data.forEach((key, value) {
       drawArc(
         lastAngle,
@@ -101,8 +107,8 @@ class CategoriesCircularIndicatorPaint extends CustomPainter {
       ..strokeWidth = s.width / 8;
     Rect rect = Rect.fromCenter(
       center: Offset(s.width / 2, s.height / 2),
-      width: s.width,
-      height: s.height,
+      width: min(s.width, s.height) * 0.7,
+      height: min(s.width, s.height) * 0.7,
     );
     c.drawArc(rect, start, end, false, paint);
   }
