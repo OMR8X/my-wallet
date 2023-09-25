@@ -9,13 +9,13 @@ class TransactionsRepositoryImpel implements TransactionsRepository {
   final TransactionDataSource dataSource;
   TransactionsRepositoryImpel({required this.dataSource});
   @override
-  Future<void> addExpense(Expense e) async {
-    return await dataSource.addExpense(e);
+  Future<void> addTransaction(Transaction t) async{
+    return await dataSource.addTransaction(t);
   }
 
   @override
-  Future<void> addIncome(Income i) async {
-    return await dataSource.addIncome(i);
+  Future<List<Transaction>> getLastTransactions() async{
+    return await dataSource.getLastTransactions();
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
-import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
+
 
 class ExpenseModel extends Expense {
   ExpenseModel({  required super.id,

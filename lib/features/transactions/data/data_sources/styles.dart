@@ -38,7 +38,7 @@ TransStyle getStyleByCategory(String category) {
     case "salary":
       return TransStyle(icon: "icon", color: const Color(0xff0073E6));
     default:
-       return TransStyle(icon: "icon", color: Colors.grey);
+      return TransStyle(icon: "icon", color: Colors.grey);
   }
 }
 

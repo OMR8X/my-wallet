@@ -4,13 +4,15 @@ import 'package:my_wallet/features/transactions/domain/entities/transaction.dart
 
 abstract class TransactionsRepository {
   // Getters
+  Future<List<Transaction>> getLastTransactions();
   Future<List<Transaction>> getRecentTransactions();
+  //
   Future<List<Income>> getAllIncomes();
   Future<List<Expense>> getAllExpenses();
+  //
   Future<(double, double)> getExpensesAndIncomeAmount();
   // Adders
-  Future<void> addIncome(Income i);
-  Future<void> addExpense(Expense e);
+  Future<void> addTransaction(Transaction t);
   // updaters
   Future<void> updateTransaction(Transaction t);
   //Deletes
