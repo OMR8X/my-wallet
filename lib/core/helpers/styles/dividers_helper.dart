@@ -7,14 +7,10 @@ class DividerHelper {
         height: 1,
         thickness: thickness,
         color: ColorsHelper.borders,
-        endIndent: 10,
-        indent: 10,
       );
   static VerticalDivider get v1 => const VerticalDivider(
         width: 1,
         thickness: thickness,
         color: ColorsHelper.borders,
-        endIndent: 10,
-        indent: 10,
       );
 }

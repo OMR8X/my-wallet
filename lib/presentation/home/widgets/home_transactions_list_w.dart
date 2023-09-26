@@ -12,7 +12,7 @@ class HomeTransactionsListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: SizedBox(
-        width: SizesHelper.mainTileWidth(context),
+        width: SizesHelper.mainTileWidth(context) - 10,
         child: Column(
           children: [
             SizedBox(
@@ -24,7 +24,7 @@ class HomeTransactionsListWidget extends StatelessWidget {
                       // color: Colors.cyan,
                       child: const Center(
                         child: Text(
-                          "data",
+                          "سجلات الدخل",
                           style: FontsStylesHelper.textStyle14,
                         ),
                       ),
@@ -35,7 +35,7 @@ class HomeTransactionsListWidget extends StatelessWidget {
                       // color: Colors.orange,
                       child: const Center(
                         child: Text(
-                          "data",
+                          "سجلات الصرف",
                           style: FontsStylesHelper.textStyle14,
                         ),
                       ),
@@ -46,8 +46,8 @@ class HomeTransactionsListWidget extends StatelessWidget {
             ),
             DividerHelper.h1,
             Expanded(
-              child: Container(
-                height: 90,
+              child: ListView(
+                children: [],
               ),
             ),
           ],
