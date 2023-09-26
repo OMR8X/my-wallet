@@ -3,8 +3,6 @@ import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
-
-import '../../../core/helpers/styles/colors_h.dart';
 import '../../../core/helpers/styles/sizes_h.dart';
 
 class TransactionWidget extends StatelessWidget {
@@ -42,18 +40,11 @@ class TransactionWidget extends StatelessWidget {
             children: [
               Text(
                 transaction.category,
-                style: const TextStyle(
-                  color: ColorsHelper.text2,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: FontsStylesHelper.textStyle15,
               ),
               const Text(
                 'عملية ',
-                style: TextStyle(
-                  color: ColorsHelper.text2,
-                  fontSize: 16,
-                ),
+                style: FontsStylesHelper.textStyle14,
               ),
             ],
           ),
