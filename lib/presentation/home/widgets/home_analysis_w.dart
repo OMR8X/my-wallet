@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/radius_h.dart';
+import 'package:my_wallet/core/helpers/styles/shadows_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/categories_circular_indicator_widget.dart';
@@ -19,9 +20,11 @@ class HomeAnalysisWidget extends StatelessWidget {
       height: 200,
       width: SizesHelper.mainTileWidth(context),
       decoration: BoxDecoration(
-        color: ColorsHelper.tiles,
-        borderRadius: RadiusHelper.r2,
-      ),
+          color: ColorsHelper.tiles,
+          borderRadius: RadiusHelper.r2,
+          boxShadow: [
+            ShadowsHelper.sh2,
+          ]),
       child: Row(
         children: [
           // indicator
