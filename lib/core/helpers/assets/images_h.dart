@@ -20,4 +20,5 @@ class ExpensesIcons {
 class IncomeIcons {
   static const privateJob = "$incomesRoot/private_job.svg";
   static const salary = "$incomesRoot/salary.svg";
+   static const gifts = "$expenseRoot/gifts.svg";
 }
