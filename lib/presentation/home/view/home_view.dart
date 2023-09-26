@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_wallet/core/helpers/styles/borders_h.dart';
-import 'package:my_wallet/core/helpers/styles/colors_h.dart';
-import 'package:my_wallet/core/helpers/styles/dividers_helper.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
-import 'package:my_wallet/core/helpers/styles/radius_h.dart';
-import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/presentation/home/widgets/home_analysis_w.dart';
 import 'package:my_wallet/presentation/home/widgets/home_transactions_list_w.dart';
 import 'package:my_wallet/presentation/home/widgets/home_v_boxes_w.dart';
-
-import '../../../core/helpers/styles/shadows_h.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -37,7 +30,6 @@ class _HomeViewState extends State<HomeView> {
           const HomeViewBoxesWidgets(),
           SpacingHelper.h2,
           const HomeTransactionsListWidget(),
-          SpacingHelper.h4,
         ],
       ),
     );
