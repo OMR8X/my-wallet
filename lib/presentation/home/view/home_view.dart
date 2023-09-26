@@ -7,7 +7,10 @@ import 'package:my_wallet/core/helpers/styles/radius_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/presentation/home/widgets/home_analysis_w.dart';
+import 'package:my_wallet/presentation/home/widgets/home_transactions_list_w.dart';
 import 'package:my_wallet/presentation/home/widgets/home_v_boxes_w.dart';
+
+import '../../../core/helpers/styles/shadows_h.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -33,63 +36,9 @@ class _HomeViewState extends State<HomeView> {
           SpacingHelper.h2,
           const HomeViewBoxesWidgets(),
           SpacingHelper.h2,
-          const TransactionsListWidget(),
+          const HomeTransactionsListWidget(),
           SpacingHelper.h4,
         ],
-      ),
-    );
-  }
-}
-
-class TransactionsListWidget extends StatelessWidget {
-  const TransactionsListWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        width: SizesHelper.mainTileWidth(context),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 75,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      // color: Colors.cyan,
-                      child: const Center(
-                        child: Text(
-                          "data",
-                          style: FontsStylesHelper.textStyle14,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      // color: Colors.orange,
-                      child: const Center(
-                        child: Text(
-                          "data",
-                          style: FontsStylesHelper.textStyle14,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            DividerHelper.h1,
-            Expanded(
-              child: Container(
-                height: 90,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -23,17 +23,17 @@ class HomeViewBoxesWidgets extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Box(
-            color: Colors.red,
-            title: '1200\$',
-            subTitle: 'الصرف',
-            iconPath: UIIcon.downArrow,
-          ),
-          SpacingHelper.w2,
-          const Box(
             color: Colors.green,
             title: '900\$',
             subTitle: 'الدخل',
             iconPath: UIIcon.upArrow,
+          ),
+          SpacingHelper.w2,
+          const Box(
+            color: Colors.red,
+            title: '1200\$',
+            subTitle: 'الصرف',
+            iconPath: UIIcon.downArrow,
           ),
         ],
       ),
@@ -67,25 +67,17 @@ class Box extends StatelessWidget {
             ]),
         child: Row(
           children: [
-            // icon
-            Expanded(
-              flex: 5,
-              child: SizedBox(
-                child: SvgPicture.asset(
-                  iconPath,
-                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                ),
-              ),
-            ),
             // text
             Expanded(
               flex: 7,
               child: SizedBox(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 18.0),
+                  padding: Directionality.of(context).index == 0
+                      ? const EdgeInsets.only(right: 18.0)
+                      : const EdgeInsets.only(left: 18.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SpacingHelper.widthExtender,
                       Text(
@@ -99,6 +91,16 @@ class Box extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+            ),
+            // icon
+            Expanded(
+              flex: 5,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  iconPath,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
                 ),
               ),
             ),
