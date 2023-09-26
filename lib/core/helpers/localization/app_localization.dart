@@ -53,6 +53,6 @@ class _AppLocalizationsDelegate
 
 extension TranslateX on String {
   String tr(BuildContext context) {
-    return AppLocalizations.of(context)!.translate(this);
+    return AppLocalizations.of(context)?.translate(this) ?? "null";
   }
 }

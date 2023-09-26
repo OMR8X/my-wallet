@@ -16,6 +16,7 @@ class MyWallet extends StatelessWidget {
     return MaterialApp(
       supportedLocales: const [
         Locale('ar'),
+        Locale('en'),
       ],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
