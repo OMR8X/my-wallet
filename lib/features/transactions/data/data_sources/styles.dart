@@ -54,7 +54,7 @@ TransStyle getStyleByCategory(String category) {
     case "sports":
       return TransStyle(
         icon: ExpensesIcons.sport,
-        color: ExpensesColors.shoppingColor,
+        color: ExpensesColors.sportColor,
       );
     case "transport":
       return TransStyle(
