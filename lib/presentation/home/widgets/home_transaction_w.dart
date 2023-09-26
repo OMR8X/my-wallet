@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_wallet/core/helpers/localization/app_localization.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
@@ -25,7 +26,9 @@ class TransactionWidget extends StatelessWidget {
           SizedBox(
             width: 60,
             child: Padding(
-              padding: const EdgeInsets.only(left: 8),
+              padding: Directionality.of(context).index == 0
+                  ? const EdgeInsets.only(left: 8)
+                  : const EdgeInsets.only(right: 8),
               child: CircleAvatar(
                 radius: 30,
                 backgroundColor: transaction.first.transStyle.color,
@@ -40,7 +43,7 @@ class TransactionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(transaction.first.category,
+              Text(transaction.first.category.tr(context),
                   style: FontsStylesHelper.textStyle15),
               SpacingHelper.h1,
               const Text(

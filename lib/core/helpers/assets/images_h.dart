@@ -1,6 +1,6 @@
 const String expenseRoot = 'assets/pictures/icons/expense';
 const String incomesRoot = 'assets/pictures/icons/income';
-const String uiRoot = 'assets/pictures/icons/ui';
+const String uiRoot =      'assets/pictures/icons/ui';
 
 abstract class ExpensesIcons {
   static const bills = "$expenseRoot/bills.svg";
