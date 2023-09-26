@@ -29,9 +29,9 @@ class HomeAnalysisWidget extends StatelessWidget {
           ]),
       child: Row(
         children: [
-          // indicator
+          // elements
           Expanded(
-            child: CategoriesCircularIndicatorWidget(
+            child: TransactionsListWidget(
               transaction: dumpListOfTransaction,
             ),
           ),
@@ -40,9 +40,9 @@ class HomeAnalysisWidget extends StatelessWidget {
             thickness: 2,
             width: 0,
           ),
-          // elements
+          // indicator
           Expanded(
-            child: TransactionsListWidget(
+            child: CategoriesCircularIndicatorWidget(
               transaction: dumpListOfTransaction,
             ),
           ),
@@ -118,7 +118,7 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
                 );
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: sublist,
                 );
               }),
@@ -144,8 +144,17 @@ class TransactionsListItem extends StatelessWidget {
     return SizedBox(
       width: SizesHelper.mainTileWidth(context) / 2.5,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          //
+          Icon(
+            Icons.circle,
+            size: 6.0,
+            color: color,
+          ),
+
+          //
+          SpacingHelper.w1,
           //
           Text(
             category,
@@ -153,14 +162,6 @@ class TransactionsListItem extends StatelessWidget {
                 color: ColorsHelper.text1,
                 fontSize: 14,
                 fontWeight: FontWeight.bold),
-          ),
-          //
-          SpacingHelper.w1,
-          //
-          Icon(
-            Icons.circle,
-            size: 6.0,
-            color: color,
           ),
         ],
       ),
