@@ -20,13 +20,13 @@ class HomeViewBoxesWidgets extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Box(
+          const Box(
             color: Colors.red,
             title: '',
             subTitle: '',
           ),
           SpacingHelper.w2,
-          Box(
+          const Box(
             color: Colors.green,
             title: '',
             subTitle: '',
@@ -36,6 +36,8 @@ class HomeViewBoxesWidgets extends StatelessWidget {
     );
   }
 }
+
+
 
 class Box extends StatelessWidget {
   const Box({
