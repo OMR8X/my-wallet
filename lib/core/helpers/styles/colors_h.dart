@@ -28,6 +28,6 @@ class ExpensesColors {
 
 class IncomeColors {
   static const privateJob = Color(0xffFF6600);
-  static const salary = Color(0xff0073E6);
+  static const salaryColor = Color(0xff0073E6);
   static const giftsColor = Color(0xffFF99CC);
 }
