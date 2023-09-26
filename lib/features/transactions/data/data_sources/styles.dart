@@ -1,85 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:my_wallet/core/helpers/assets/images_h.dart';
+import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/features/transactions/domain/entities/trans_style.dart';
 
 TransStyle getStyleByCategory(String category) {
-  String baseExpensePath = "assets/icons/expense/";
-  String baseIncomePath = "assets/icons/income/";
   switch (category) {
     case "bills":
       return TransStyle(
-        icon: "$baseExpensePath bills.svg",
-        color: const Color(0xff0073E6),
+        icon: ExpensesIcons.bills,
+        color: ExpensesColors.billsColor,
       );
     case "cars":
       return TransStyle(
-        icon: "$baseExpensePath cars.svg",
-        color: const Color(0xffFF6600),
+        icon: ExpensesIcons.cars,
+        color: ExpensesColors.carsColor,
       );
     case "clothes":
       return TransStyle(
-        icon: "$baseExpensePath clothes.svg",
-        color: const Color(0xffFF3399),
+        icon: ExpensesIcons.clothes,
+        color: ExpensesColors.clothesColor,
       );
 
     case "food_and_drinks":
       return TransStyle(
-        icon: "$baseExpensePath food&drinks.svg",
-        color: const Color(0xffFFCC00),
+        icon: ExpensesIcons.foodAndDrink,
+        color: ExpensesColors.foodAndDrinkColor,
       );
     case "entertainment":
       return TransStyle(
-        icon: "$baseExpensePath entertainment.svg",
-        color: const Color(0xff9900CC),
+        icon: ExpensesIcons.entertainment,
+        color: ExpensesColors.entertainmentColor,
       );
     case "gifts":
       return TransStyle(
-        icon: "$baseExpensePath gifts.svg",
-        color: const Color(0xffFF99CC),
+        icon: ExpensesIcons.gifts,
+        color: ExpensesColors.giftsColor,
       );
     case "health":
       return TransStyle(
-        icon: "$baseExpensePath health.svg",
-        color: const Color(0xff0099CC),
+        icon: ExpensesIcons.health,
+        color: ExpensesColors.healthColor,
       );
     case "house":
       return TransStyle(
-        icon: "$baseExpensePath house.svg",
-        color: const Color(0xffFF9933),
+        icon: ExpensesIcons.house,
+        color: ExpensesColors.houseColor,
       );
     case "animals":
       return TransStyle(
-        icon: "$baseExpensePath animals.svg",
-        color: const Color(0xff66CC99),
+        icon: ExpensesIcons.animals,
+        color: ExpensesColors.animalsColor,
       );
     case "sports":
       return TransStyle(
-        icon: "$baseExpensePath sport.svg",
-        color: const Color(0xffFF3333),
+        icon: ExpensesIcons.sport,
+        color: ExpensesColors.shoppingColor,
       );
     case "transport":
       return TransStyle(
-        icon: "$baseExpensePath transport.svg",
-        color: const Color(0xffDFBC40),
+        icon: ExpensesIcons.transport,
+        color: ExpensesColors.transportColor,
       );
     case "care":
       return TransStyle(
-        icon: "$baseExpensePath care.svg",
-        color: const Color(0xffFF66E6),
+        icon: ExpensesIcons.care,
+        color: ExpensesColors.careColor,
       );
     case "shopping":
       return TransStyle(
-        icon: "$baseExpensePath shopping.svg",
-        color: const Color(0xffFF0066),
+        icon: ExpensesIcons.shopping,
+        color: ExpensesColors.shoppingColor,
       );
     case "private_job":
       return TransStyle(
-        icon: "$baseIncomePath private_job.svg",
-        color: const Color(0xffFF6600),
+        icon: IncomeIcons.privateJob,
+        color: IncomeColors.privateJob,
       );
     case "salary":
       return TransStyle(
-        icon: "$baseIncomePath salary.svg",
-        color: const Color(0xff0073E6),
+        icon: IncomeIcons.salary,
+        color: IncomeColors.salaryColor,
       );
     default:
       return TransStyle(icon: "", color: Colors.grey);
