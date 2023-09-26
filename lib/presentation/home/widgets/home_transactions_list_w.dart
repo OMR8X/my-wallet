@@ -3,8 +3,6 @@ import 'package:my_wallet/core/helpers/functions/mergers/transactions_m.dart';
 import 'package:my_wallet/core/helpers/styles/dividers_helper.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
-import 'package:my_wallet/dump/list_transactions.dart';
-import 'package:my_wallet/features/transactions/data/models/transaction_m.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 import 'package:my_wallet/presentation/home/widgets/home_transaction_w.dart';
 

@@ -19,10 +19,19 @@ class MyWallet extends StatelessWidget {
         Locale('en'),
       ],
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      localeResolutionCallback: (locales, supportedLocales) {
+        for (var locale in supportedLocales) {
+          if (locales != null && locales.languageCode == locale.languageCode) {
+            return locales;
+          }
+        }
+        return null;
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: ColorsHelper.background,
