@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_wallet/core/helpers/styles/borders_h.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/radius_h.dart';
 import 'package:my_wallet/core/helpers/styles/shadows_h.dart';
@@ -22,6 +23,7 @@ class HomeAnalysisWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: ColorsHelper.tiles,
           borderRadius: RadiusHelper.r2,
+          border: BordersHelper.b1,
           boxShadow: [
             ShadowsHelper.sh2,
           ]),
@@ -92,7 +94,7 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
       initData();
       if (context.size != null) {
         setState(() {
-          size = Size(context.size!.width, context.size!.height * 0.7);
+          size = Size(context.size!.width * 0.7, context.size!.height * 0.8);
         });
       }
     });
@@ -118,6 +120,7 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
                 );
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: sublist,
                 );
               }),
@@ -141,19 +144,19 @@ class TransactionsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         //
         Text(
           category,
-          style: const TextStyle(color: ColorsHelper.text1),
+          style: const TextStyle(color: ColorsHelper.text1, fontSize: 10),
         ),
         //
         SpacingHelper.w1,
         //
         Icon(
           Icons.circle,
-          size: 10,
+          size: 6.0,
           color: color,
         ),
       ],
