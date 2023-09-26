@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
           SpacingHelper.h2,
           const HomeViewBoxesWidgets(),
           SpacingHelper.h2,
-          const HomeTransactionsListWidget(),
+          const HomeTransactionsListWidget(transactions: []),
         ],
       ),
     );
