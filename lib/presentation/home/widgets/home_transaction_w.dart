@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
@@ -11,11 +12,9 @@ class TransactionWidget extends StatelessWidget {
   const TransactionWidget({
     super.key,
     required this.transaction,
-    required this.count,
   });
-  final Transaction transaction;
-  final int count;
-
+  final List<Transaction> transaction;
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,7 +30,10 @@ class TransactionWidget extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: CircleAvatar(
                 radius: 30,
-                backgroundColor: getStyleByCategory(transaction.category).color,
+                backgroundColor: transaction.first.transStyle.color,
+                child: transaction.first.transStyle.icon.isNotEmpty
+                    ? SvgPicture.asset(transaction.first.transStyle.icon)
+                    : const SizedBox(),
               ),
             ),
           ),
@@ -40,20 +42,12 @@ class TransactionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                transaction.category,
-                style: const TextStyle(
-                  color: ColorsHelper.text2,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(transaction.first.category,
+                  style: FontsStylesHelper.textStyle15),
+              SpacingHelper.h1,
               const Text(
-                'عملية ',
-                style: TextStyle(
-                  color: ColorsHelper.text2,
-                  fontSize: 16,
-                ),
+                'عملية',
+                style: FontsStylesHelper.textStyle10,
               ),
             ],
           ),

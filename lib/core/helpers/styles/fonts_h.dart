@@ -5,14 +5,14 @@ abstract class FontsStylesHelper {
     fontSize: 7,
     // Regular -- bold
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: Colors.white54,
   );
 
   static const textStyle10 = TextStyle(
     fontSize: 10,
     //Bold -- sub-titles
     fontWeight: FontWeight.bold,
-    color: Colors.white,
+    color: Colors.white54,
   );
 
   static const textStyle12 = TextStyle(
@@ -39,6 +39,12 @@ abstract class FontsStylesHelper {
   static const textStyle15 = TextStyle(
     fontSize: 15,
     // Extra-bold
+    fontWeight: FontWeight.w800,
+    color: Colors.white,
+  );
+  static const textStyle18 = TextStyle(
+    fontSize: 18,
+    // app bar title
     fontWeight: FontWeight.w800,
     color: Colors.white,
   );

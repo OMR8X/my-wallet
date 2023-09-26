@@ -1,7 +1,14 @@
 transactionCategoryToName(String category, String local) {
   switch (category) {
+
     case "bills":
+    if(local=="ar"){
+      
+    }
       return "";
+
+
+
     case "cars":
       return "";
     case "clothes":
