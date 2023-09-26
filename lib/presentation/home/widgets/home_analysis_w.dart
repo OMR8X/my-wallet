@@ -31,7 +31,6 @@ class HomeAnalysisWidget extends StatelessWidget {
         children: [
           // indicator
           Expanded(
-            flex: 10,
             child: CategoriesCircularIndicatorWidget(
               transaction: dumpListOfTransaction,
             ),
@@ -43,7 +42,6 @@ class HomeAnalysisWidget extends StatelessWidget {
           ),
           // elements
           Expanded(
-            flex: 8,
             child: TransactionsListWidget(
               transaction: dumpListOfTransaction,
             ),
@@ -94,7 +92,7 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
       initData();
       if (context.size != null) {
         setState(() {
-          size = Size(context.size!.width * 0.7, context.size!.height * 0.8);
+          size = Size(context.size!.width, context.size!.height * 0.8);
         });
       }
     });
@@ -112,8 +110,8 @@ class _TransactionsListWidgetState extends State<TransactionsListWidget> {
           child: PageView.builder(
               itemCount: (items.length / 5).ceil(),
               itemBuilder: (context, index) {
-                final start = index * 5;
-                final end = (index + 1) * 5;
+                final start = index * 3;
+                final end = (index + 1) * 3;
                 final sublist = items.sublist(
                   start,
                   end < items.length ? end : items.length,
@@ -143,23 +141,29 @@ class TransactionsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        //
-        Text(
-          category,
-          style: const TextStyle(color: ColorsHelper.text1, fontSize: 10),
-        ),
-        //
-        SpacingHelper.w1,
-        //
-        Icon(
-          Icons.circle,
-          size: 6.0,
-          color: color,
-        ),
-      ],
+    return SizedBox(
+      width: SizesHelper.mainTileWidth(context) / 2.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          //
+          Text(
+            category,
+            style: const TextStyle(
+                color: ColorsHelper.text1,
+                fontSize: 14,
+                fontWeight: FontWeight.bold),
+          ),
+          //
+          SpacingHelper.w1,
+          //
+          Icon(
+            Icons.circle,
+            size: 6.0,
+            color: color,
+          ),
+        ],
+      ),
     );
   }
 }

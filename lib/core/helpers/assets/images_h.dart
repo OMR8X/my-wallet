@@ -1,5 +1,6 @@
 const String expenseRoot = 'assets/pictures/icons/expense';
 const String incomesRoot = 'assets/pictures/icons/income';
+const String uiRoot = 'assets/pictures/icons/ui';
 
 class ExpensesIcons {
   static const bills = "$expenseRoot/bills.svg";
@@ -20,5 +21,10 @@ class ExpensesIcons {
 class IncomeIcons {
   static const privateJob = "$incomesRoot/private_job.svg";
   static const salary = "$incomesRoot/salary.svg";
-   static const gifts = "$expenseRoot/gifts.svg";
+  static const gifts = "$expenseRoot/gifts.svg";
+}
+
+class UIIcon {
+  static const downArrow = "$uiRoot/down_arrow.svg";
+  static const upArrow = "$uiRoot/up_arrow.svg";
 }

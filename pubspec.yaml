@@ -38,6 +38,7 @@ dependencies:
   sqflite: ^2.3.0
   get_it: ^7.6.4
   dartz: ^0.10.1
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
   assets:
     - assets/pictures/icons/expense/
     - assets/pictures/icons/income/
+    - assets/pictures/icons/ui/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

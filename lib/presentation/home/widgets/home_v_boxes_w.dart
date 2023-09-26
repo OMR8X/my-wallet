@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:my_wallet/core/helpers/assets/images_h.dart';
 import 'package:my_wallet/core/helpers/styles/borders_h.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/radius_h.dart';
@@ -18,9 +20,17 @@ class HomeViewBoxesWidgets extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Box(),
+          Box(
+            color: Colors.red,
+            title: '',
+            subTitle: '',
+          ),
           SpacingHelper.w2,
-          const Box(),
+          Box(
+            color: Colors.green,
+            title: '',
+            subTitle: '',
+          ),
         ],
       ),
     );
@@ -30,8 +40,13 @@ class HomeViewBoxesWidgets extends StatelessWidget {
 class Box extends StatelessWidget {
   const Box({
     super.key,
+    required this.color,
+    required this.title,
+    required this.subTitle,
   });
-
+  final Color color;
+  final String title;
+  final String subTitle;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -44,6 +59,19 @@ class Box extends StatelessWidget {
             boxShadow: [
               ShadowsHelper.sh2,
             ]),
+        child: Row(
+          children: [
+            Expanded(
+                flex: 5,
+                child: SizedBox(
+                  child: SvgPicture.asset(
+                    UIIcon.upArrow,
+                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                  ),
+                )),
+            const Expanded(flex: 7, child: SizedBox()),
+          ],
+        ),
       ),
     );
   }
