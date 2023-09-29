@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RadiusHelper {
-  static const double unit = 8.0;
+  static const double unit = 4.0;
   // radiuses
   static BorderRadius get r1 => BorderRadius.circular(unit);
   static BorderRadius get r2 => BorderRadius.circular(unit * 2);
