@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 
 class DividerHelper {
-  static const double thickness = 1;
+  static const double thickness = 0.5;
   static Divider get h1 => const Divider(
         height: 1,
         thickness: thickness,

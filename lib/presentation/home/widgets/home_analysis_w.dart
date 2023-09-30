@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_wallet/core/helpers/localization/app_localization.dart';
 import 'package:my_wallet/core/helpers/styles/borders_h.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/radius_h.dart';
@@ -8,54 +9,35 @@ import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/categories_circular_indicator_widget.dart';
 import 'package:my_wallet/dump/list_transactions.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
+import 'package:my_wallet/features/transactions/domain/entities/income.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 class HomeAnalysisWidget extends StatelessWidget {
   const HomeAnalysisWidget({
     super.key,
+    required this.transactions,
+    required this.categoriesAmounts,
   });
-
+  final List<Transaction> transactions;
+  final (Map<String, List<Transaction>>, double) categoriesAmounts;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       width: SizesHelper.mainTileWidth(context),
-      decoration: BoxDecoration(
-          color: ColorsHelper.tiles,
-          borderRadius: RadiusHelper.r2,
-          border: BordersHelper.b1,
-          boxShadow: [
-            ShadowsHelper.sh2,
-          ]),
-      child: Row(
-        children: [
-          // elements
-          Expanded(
-            child: TransactionsListWidget(
-              transaction: dumpListOfTransaction,
-            ),
-          ),
-          const VerticalDivider(
-            color: ColorsHelper.borders,
-            thickness: 2,
-            width: 0,
-          ),
-          // indicator
-          Expanded(
-            child: CategoriesCircularIndicatorWidget(
-              transaction: dumpListOfTransaction,
-            ),
-          ),
-        ],
+      child: CategoriesCircularIndicatorWidget(
+        transaction: transactions,
       ),
     );
   }
 }
 
 class TransactionsListWidget extends StatefulWidget {
-  const TransactionsListWidget({super.key, required this.transaction});
+  const TransactionsListWidget(
+      {super.key, required this.transactions, required this.categoriesAmounts});
   // all transactions
-  final List<Transaction> transaction;
+  final List<Transaction> transactions;
+  final (Map<String, List<Transaction>>, double) categoriesAmounts;
   @override
   State<TransactionsListWidget> createState() => _TransactionsListWidgetState();
 }
@@ -63,40 +45,41 @@ class TransactionsListWidget extends StatefulWidget {
 class _TransactionsListWidgetState extends State<TransactionsListWidget> {
   // widget size
   Size? size;
-  // store the full amount of money
-  double fullAmount = 0.0;
-  // collect data
-  Map<String, double> data = {};
-  //
+  // widgets
   List<Widget> items = [];
   void initData() {
-    fullAmount = 0.0;
-    for (var t in widget.transaction) {
-      fullAmount += t.amount;
-      data[t.category] ??= 0.0; // Initialize to 0.0 if null
-      data[t.category] = data[t.category]! + t.amount;
-    }
-    data.forEach((key, value) {
-      items.add(TransactionsListItem(
-        category: key,
-        color: getStyleByCategory(key).color,
-        amount: value,
-      ));
+    setState(() {
+      widget.categoriesAmounts.$1.forEach((key, value) {
+        double amount = 0.0;
+        for (var e in value) {
+          amount += e.amount;
+        }
+        items.add(TransactionsListItem(
+          category: key,
+          color: getStyleByCategory(key).color,
+          amount: amount,
+        ));
+      });
     });
-    setState(() {});
   }
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      initData();
       if (context.size != null) {
         setState(() {
           size = Size(context.size!.width, context.size!.height * 0.8);
         });
       }
+      initData();
     });
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant TransactionsListWidget oldWidget) {
+    initData();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -157,7 +140,7 @@ class TransactionsListItem extends StatelessWidget {
           SpacingHelper.w1,
           //
           Text(
-            category,
+            category.tr(context),
             style: const TextStyle(
                 color: ColorsHelper.text1,
                 fontSize: 14,

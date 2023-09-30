@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:my_wallet/core/helpers/assets/fonts_h.dart';
 import 'package:my_wallet/core/helpers/assets/images_h.dart';
 import 'package:my_wallet/core/helpers/styles/borders_h.dart';
-import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/radius_h.dart';
-import 'package:my_wallet/core/helpers/styles/shadows_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 
 class HomeViewBoxesWidgets extends StatelessWidget {
   const HomeViewBoxesWidgets({
     super.key,
+    required this.income,
+    required this.expense,
   });
-
+  final double income, expense;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,16 +21,16 @@ class HomeViewBoxesWidgets extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Box(
+          Box(
             color: Colors.green,
-            title: '900\$',
+            title: '$income\$',
             subTitle: 'الدخل',
             iconPath: UIIcon.upArrow,
           ),
           SpacingHelper.w2,
-          const Box(
+          Box(
             color: Colors.red,
-            title: '1200\$',
+            title: '$expense\$',
             subTitle: 'الصرف',
             iconPath: UIIcon.downArrow,
           ),
@@ -57,13 +56,13 @@ class Box extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 90,
+        height: 65,
         decoration: BoxDecoration(
-            color: ColorsHelper.tiles,
+            // color: ColorsHelper.tiles,
             border: BordersHelper.b1,
             borderRadius: RadiusHelper.r2,
             boxShadow: [
-              ShadowsHelper.sh2,
+              // ShadowsHelper.sh2,
             ]),
         child: Row(
           children: [
@@ -73,8 +72,8 @@ class Box extends StatelessWidget {
               child: SizedBox(
                 child: Padding(
                   padding: Directionality.of(context).index == 0
-                      ? const EdgeInsets.only(right: 18.0)
-                      : const EdgeInsets.only(left: 18.0),
+                      ? const EdgeInsets.only(right: 16.0)
+                      : const EdgeInsets.only(left: 16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +95,7 @@ class Box extends StatelessWidget {
             ),
             // icon
             Expanded(
-              flex: 5,
+              flex: 4,
               child: SizedBox(
                 child: SvgPicture.asset(
                   iconPath,

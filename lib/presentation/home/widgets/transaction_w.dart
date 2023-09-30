@@ -7,12 +7,26 @@ import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 import '../../../core/helpers/styles/sizes_h.dart';
 
-class TransactionWidget extends StatelessWidget {
+class TransactionWidget extends StatefulWidget {
   const TransactionWidget({
     super.key,
     required this.transaction,
   });
   final List<Transaction> transaction;
+
+  @override
+  State<TransactionWidget> createState() => _TransactionWidgetState();
+}
+
+class _TransactionWidgetState extends State<TransactionWidget> {
+  double amount = 0.0;
+  @override
+  void initState() {
+    for (var t in widget.transaction) {
+      amount += t.amount;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +45,9 @@ class TransactionWidget extends StatelessWidget {
                   : const EdgeInsets.only(right: 8),
               child: CircleAvatar(
                 radius: 30,
-                backgroundColor: transaction.first.transStyle.color,
-                child: transaction.first.transStyle.icon.isNotEmpty
-                    ? SvgPicture.asset(transaction.first.transStyle.icon)
+                backgroundColor: widget.transaction.first.transStyle.color,
+                child: widget.transaction.first.transStyle.icon.isNotEmpty
+                    ? SvgPicture.asset(widget.transaction.first.transStyle.icon)
                     : const SizedBox(),
               ),
             ),
@@ -43,7 +57,7 @@ class TransactionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(transaction.first.category.tr(context),
+              Text(widget.transaction.last.category.tr(context),
                   style: FontsStylesHelper.textStyle15),
               SpacingHelper.h1,
               const Text(
@@ -53,7 +67,7 @@ class TransactionWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const Text('2300', style: FontsStylesHelper.textStyle12),
+          Text('$amount\$', style: FontsStylesHelper.textStyle12),
         ],
       ),
     );
