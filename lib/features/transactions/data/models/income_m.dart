@@ -1,6 +1,5 @@
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/income.dart';
-import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 class IncomeModel extends Income {
   IncomeModel({

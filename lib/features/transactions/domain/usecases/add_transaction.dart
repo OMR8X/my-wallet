@@ -1,6 +1,4 @@
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
-
-import '../entities/expense.dart';
 import '../repositories/trans_repository.dart';
 
 class AddExpenseUS {

@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:my_wallet/core/helpers/localization/app_localization.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
-import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 import '../../../core/helpers/styles/sizes_h.dart';
 
