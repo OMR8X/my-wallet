@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:my_wallet/core/helpers/functions/mergers/transactions_m.dart';
@@ -15,8 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
   double expenseAmount = 0.0;
   List<Income> incomes = [];
   List<Expense> expenses = [];
-  late (Map<String, List<Transaction>>, double) incomesCategoriesAmounts;
-  late (Map<String, List<Transaction>>, double) expensesCategoriesAmounts;
+  TransactionType currentType = TransactionType.income;
   init() async {
     // fake data :
     for (var t in dumpListOfTransaction) {
@@ -28,29 +29,49 @@ class HomeCubit extends Cubit<HomeState> {
         expenseAmount += t.amount;
       }
     }
-    incomesCategoriesAmounts = mergeTransactions(incomes);
-    expensesCategoriesAmounts = mergeTransactions(expenses);
+    incomes.sort((a, b) => a.date.compareTo(b.date));
+    expenses.sort((a, b) => a.date.compareTo(b.date));
   }
 
   getExpenses() {
-    print("get expense");
-    emit(HomeExpenses(
-      balance: balance,
-      income: incomeAmount,
-      expense: expenseAmount,
-      expenses: expenses,
-      expenseCategoriesAmounts: expensesCategoriesAmounts,
-    ));
+    currentType = TransactionType.expense;
+    emitState();
   }
 
   getIncomes() {
-    print("get incomes");
-    emit(HomeIncomes(
-      balance: balance,
-      income: incomeAmount,
-      expense: expenseAmount,
-      incomes: incomes,
-      incomesCategoriesAmounts: incomesCategoriesAmounts,
-    ));
+    currentType = TransactionType.income;
+    emitState();
+  }
+
+  addExpense(Expense expense) {
+    expenses.insert(0, expense);
+    emitState();
+  }
+
+  addIncome(Income income) {
+    print(income.amount);
+    incomes.insert(0, income);
+    emitState();
+  }
+
+  emitState() {
+    switch (currentType) {
+      case TransactionType.expense:
+        emit(HomeTransactions(
+          balance: balance,
+          income: incomeAmount,
+          expense: expenseAmount,
+          transactions: expenses,
+        ));
+        break;
+      case TransactionType.income:
+        emit(HomeTransactions(
+          balance: balance,
+          income: incomeAmount,
+          expense: expenseAmount,
+          transactions: incomes,
+        ));
+        break;
+    }
   }
 }

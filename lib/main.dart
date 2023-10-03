@@ -8,7 +8,9 @@ import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/presentation/home/state/home/home_cubit.dart';
 import 'package:my_wallet/presentation/home/view/home_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyWallet());
 }
 

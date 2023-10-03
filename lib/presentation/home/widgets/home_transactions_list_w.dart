@@ -5,6 +5,8 @@ import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/dividers_helper.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
+import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
+import 'package:my_wallet/features/transactions/domain/entities/income.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 import 'package:my_wallet/presentation/home/state/home/home_cubit.dart';
 import 'package:my_wallet/presentation/home/widgets/transaction_w.dart';
@@ -12,11 +14,10 @@ import 'package:my_wallet/presentation/home/widgets/transaction_w.dart';
 class HomeTransactionsListWidget extends StatefulWidget {
   const HomeTransactionsListWidget({
     super.key,
-    required this.categoriesAmounts,
-    required this.selectedIndex,
+    required this.transactions,
   });
-  final (Map<String, List<Transaction>>, double) categoriesAmounts;
-  final int selectedIndex;
+  final List<Transaction> transactions;
+
   @override
   State<HomeTransactionsListWidget> createState() =>
       _HomeTransactionsListWidgetState();
@@ -39,11 +40,11 @@ class _HomeTransactionsListWidgetState
 
   initList() {
     list = [];
-    widget.categoriesAmounts.$1.forEach((key, value) {
+    for (var element in widget.transactions) {
       list.add(TransactionWidget(
-        transaction: value,
+        transaction: element,
       ));
-    });
+    }
     setState(() {});
   }
 
@@ -74,9 +75,11 @@ class _HomeTransactionsListWidgetState
                         child: Text(
                           "سجلات الدخل",
                           style: FontsStylesHelper.textStyle14.copyWith(
-                              color: widget.selectedIndex == 0
-                                  ? ColorsHelper.green
-                                  : ColorsHelper.text2),
+                            color: widget.transactions.runtimeType ==
+                                    (List<Income>)
+                                ? ColorsHelper.green
+                                : ColorsHelper.text2,
+                          ),
                         ),
                       ),
                     ),
@@ -89,7 +92,8 @@ class _HomeTransactionsListWidgetState
                         child: Text(
                           "سجلات الصرف",
                           style: FontsStylesHelper.textStyle14.copyWith(
-                              color: widget.selectedIndex == 1
+                              color: widget.transactions.runtimeType ==
+                                      (List<Expense>)
                                   ? ColorsHelper.red
                                   : ColorsHelper.text2),
                         ),

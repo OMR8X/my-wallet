@@ -1,12 +1,12 @@
 import 'trans_style.dart';
 
 abstract class Transaction {
-  final int id;
-  final String category;
-  final DateTime date;
-  final double amount;
-  final String details;
-  final TransStyle transStyle;
+  int id;
+  String category;
+  DateTime date;
+  double amount;
+  String details;
+  TransStyle transStyle;
   Transaction({
     required this.id,
     required this.transStyle,
@@ -15,4 +15,9 @@ abstract class Transaction {
     required this.details,
     required this.amount,
   });
+}
+
+enum TransactionType {
+  expense,
+  income,
 }

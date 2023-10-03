@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:my_wallet/core/helpers/localization/app_localization.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
@@ -12,6 +13,7 @@ class CategoriesCircularIndicatorWidget extends StatefulWidget {
 
   // all transactions
   final List<Transaction> transaction;
+
   @override
   State<CategoriesCircularIndicatorWidget> createState() =>
       _CategoriesCircularIndicatorWidgetState();
@@ -74,9 +76,9 @@ class _CategoriesCircularIndicatorWidgetState
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.transaction.first.runtimeType == Expense
-                  ? "الصرف الكلي"
-                  : "الدخل الكلي",
+              widget.transaction.runtimeType == (List<Expense>)
+                  ? "full_${TransactionType.expense.name}".tr(context)
+                  : "full_${TransactionType.income.name}".tr(context),
               style: const TextStyle(color: Colors.white),
             ),
             Text(

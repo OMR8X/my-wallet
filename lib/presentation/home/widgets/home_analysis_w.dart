@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/core/helpers/localization/app_localization.dart';
-import 'package:my_wallet/core/helpers/styles/borders_h.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
-import 'package:my_wallet/core/helpers/styles/radius_h.dart';
-import 'package:my_wallet/core/helpers/styles/shadows_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/categories_circular_indicator_widget.dart';
-import 'package:my_wallet/dump/list_transactions.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
-import 'package:my_wallet/features/transactions/domain/entities/income.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 class HomeAnalysisWidget extends StatelessWidget {
   const HomeAnalysisWidget({
     super.key,
     required this.transactions,
-    required this.categoriesAmounts,
+
   });
   final List<Transaction> transactions;
-  final (Map<String, List<Transaction>>, double) categoriesAmounts;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,11 +22,11 @@ class HomeAnalysisWidget extends StatelessWidget {
       width: SizesHelper.mainTileWidth(context),
       child: CategoriesCircularIndicatorWidget(
         transaction: transactions,
+      
       ),
     );
   }
 }
-
 class TransactionsListWidget extends StatefulWidget {
   const TransactionsListWidget(
       {super.key, required this.transactions, required this.categoriesAmounts});

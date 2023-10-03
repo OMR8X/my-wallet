@@ -11,6 +11,7 @@ class ColorsHelper {
   //
   static const Color text1 = Color(0xffD2D2D2);
   static const Color text2 = Color(0xffAFAFAF);
+  static const Color text3 = Color(0xff4F4F4F);
   //
 }
 
@@ -33,7 +34,6 @@ class ExpensesColors {
 }
 
 class IncomeColors {
-
   static const privateJob = Color(0xffFF6600);
   static const salary = Color(0xff0073E6);
   static const expense = Color(0xff33CC33);

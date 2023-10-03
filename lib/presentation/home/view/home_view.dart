@@ -1,8 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/mini_loading_indicator_w.dart';
+import 'package:my_wallet/dump/list_transactions.dart';
+import 'package:my_wallet/features/transactions/data/models/expense_m.dart';
+import 'package:my_wallet/features/transactions/data/models/income_m.dart';
+import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
+import 'package:my_wallet/features/transactions/domain/entities/income.dart';
+import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 import 'package:my_wallet/presentation/home/state/home/home_cubit.dart';
 import 'package:my_wallet/presentation/home/widgets/bottom_sheet_w.dart';
@@ -22,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await context.read<HomeCubit>().init();
-      await context.read<HomeCubit>().getExpenses();
+      await context.read<HomeCubit>().getIncomes();
     });
     super.initState();
   }
@@ -40,7 +45,18 @@ class _HomeViewState extends State<HomeView> {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
               builder: (context) {
-                return const HomeBottomSheet();
+                return HomeBottomSheet(
+                  onAdd: (Transaction t) {
+                    print(t.amount);
+                    setState(() {
+                      if (t is Income) {
+                        context.read<HomeCubit>().addIncome(t);
+                      } else if (t is Expense) {
+                        context.read<HomeCubit>().addExpense(t);
+                      }
+                    });
+                  },
+                );
               },
             );
           },
@@ -48,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state is HomeIncomes) {
+            if (state is HomeTransactions) {
               return Scaffold(
                 appBar: AppBar(title: Text("الرصيد الحالي ${state.balance}")),
                 body: Column(
@@ -57,8 +73,7 @@ class _HomeViewState extends State<HomeView> {
                     SpacingHelper.h4,
                     //
                     HomeAnalysisWidget(
-                      transactions: state.incomes,
-                      categoriesAmounts: state.incomesCategoriesAmounts,
+                      transactions: state.transactions,
                     ),
                     //
                     SpacingHelper.h6,
@@ -71,37 +86,7 @@ class _HomeViewState extends State<HomeView> {
                     SpacingHelper.h2,
                     //
                     HomeTransactionsListWidget(
-                      categoriesAmounts: state.incomesCategoriesAmounts,
-                      selectedIndex: 0,
-                    ),
-                  ],
-                ),
-              );
-            } else if (state is HomeExpenses) {
-              return Scaffold(
-                appBar: AppBar(title: Text("الرصيد الحالي ${state.balance}")),
-                body: Column(
-                  children: [
-                    SpacingHelper.widthExtender,
-                    SpacingHelper.h4,
-                    //
-                    HomeAnalysisWidget(
-                      transactions: state.expenses,
-                      categoriesAmounts: state.expenseCategoriesAmounts,
-                    ),
-                    //
-                    SpacingHelper.h6,
-                    //
-                    HomeViewBoxesWidgets(
-                      income: state.income,
-                      expense: state.expense,
-                    ),
-                    //
-                    SpacingHelper.h2,
-                    //
-                    HomeTransactionsListWidget(
-                      categoriesAmounts: state.expenseCategoriesAmounts,
-                      selectedIndex: 1,
+                      transactions: state.transactions,
                     ),
                   ],
                 ),
