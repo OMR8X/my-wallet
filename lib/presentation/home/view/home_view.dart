@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_wallet/core/helpers/styles/colors_h.dart';
+import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/mini_loading_indicator_w.dart';
 import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
@@ -20,6 +22,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  double balance = 0.0;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -44,7 +47,6 @@ class _HomeViewState extends State<HomeView> {
               builder: (context) {
                 return HomeBottomSheet(
                   onAdd: (Transaction t) {
-                    print(t.amount);
                     setState(() {
                       if (t is Income) {
                         context.read<HomeCubit>().addIncome(t);
@@ -59,31 +61,55 @@ class _HomeViewState extends State<HomeView> {
           },
           child: const Icon(Icons.add),
         ),
-        body: BlocBuilder<HomeCubit, HomeState>(
+        body: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {
+            if (state is HomeTransactions) {
+              setState(() {
+                balance = state.balance;
+              });
+            }
+          },
           builder: (context, state) {
             if (state is HomeTransactions) {
               return Scaffold(
-                appBar: AppBar(title: Text("الرصيد الحالي ${state.balance}")),
+                appBar: AppBar(
+                  title: Text(
+                    "الرصيد  ${state.balance}",
+                  ),
+                  actions: [
+                    Padding(
+                      padding: Directionality.of(context).index == 0
+                          ? const EdgeInsets.only(left: SizesHelper.radius)
+                          : const EdgeInsets.only(right: SizesHelper.radius),
+                      child: IconButton(
+                        splashRadius: 25,
+                        onPressed: () {},
+                        icon: const Icon(Icons.settings),
+                      ),
+                    ),
+                  ],
+                ),
                 body: Column(
                   children: [
                     SpacingHelper.widthExtender,
-                    SpacingHelper.h4,
+                    SpacingHelper.h2,
                     //
                     HomeAnalysisWidget(
                       transactions: state.transactions,
                     ),
                     //
-                    SpacingHelper.h6,
+                    SpacingHelper.h2,
                     //
                     HomeViewBoxesWidgets(
                       income: state.income,
                       expense: state.expense,
                     ),
                     //
-                    SpacingHelper.h2,
+                    SpacingHelper.h1,
                     //
                     HomeTransactionsListWidget(
                       transactions: state.transactions,
+                      currentType: state.currentType,
                     ),
                   ],
                 ),

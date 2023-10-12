@@ -48,6 +48,12 @@ abstract class FontsStylesHelper {
     fontWeight: FontWeight.w800,
     color: Colors.white,
   );
+  static const appBar = TextStyle(
+    fontSize: 19,
+    // app bar title
+    fontWeight: FontWeight.w800,
+    color: Colors.white,
+  );
   static const textStyle40 = TextStyle(
     fontSize: 40,
     // Extra-Bold -- Total Amount

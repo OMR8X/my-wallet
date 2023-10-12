@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:my_wallet/core/helpers/localization/app_localization.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
+import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
+import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
@@ -57,6 +59,12 @@ class _CategoriesCircularIndicatorWidgetState
     super.didUpdateWidget(oldWidget);
   }
 
+  String getTitle() {
+    return widget.transaction.runtimeType == (List<Expense>)
+        ? "full_${TransactionType.expense.name}".tr(context)
+        : "full_${TransactionType.income.name}".tr(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -76,14 +84,15 @@ class _CategoriesCircularIndicatorWidgetState
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.transaction.runtimeType == (List<Expense>)
-                  ? "full_${TransactionType.expense.name}".tr(context)
-                  : "full_${TransactionType.income.name}".tr(context),
-              style: const TextStyle(color: Colors.white),
+              getTitle(),
+              style: FontsStylesHelper.textStyle12.copyWith(
+                fontWeight: FontWeight.w300,
+              ),
             ),
+            SpacingHelper.h1,
             Text(
               "$fullAmount\$",
-              style: const TextStyle(color: Colors.white),
+              style: FontsStylesHelper.textStyle14,
             ),
           ],
         ),
@@ -101,16 +110,26 @@ class CategoriesCircularIndicatorPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double lastAngle = 0.0;
-    data.forEach((key, value) {
+    if (data.isEmpty) {
       drawArc(
         lastAngle,
-        (2 * pi) / (fullAmount / value),
-        getStyleByCategory(key).color,
+        (2 * pi),
+        ColorsHelper.borders,
         canvas,
         size,
       );
-      lastAngle += (2 * pi) / (fullAmount / value);
-    });
+    } else {
+      data.forEach((key, value) {
+        drawArc(
+          lastAngle,
+          (2 * pi) / (fullAmount / value),
+          getStyleByCategory(key).color,
+          canvas,
+          size,
+        );
+        lastAngle += (2 * pi) / (fullAmount / value);
+      });
+    }
   }
 
   drawArc(double start, double end, Color color, Canvas c, Size s) {

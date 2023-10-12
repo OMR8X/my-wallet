@@ -23,7 +23,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.6,
+      initialChildSize: 0.75,
       builder: (context, scrollController) => Container(
         color: ColorsHelper.background,
         child: didPickCategory
@@ -57,7 +57,7 @@ class StateOneWidget extends StatefulWidget {
 }
 
 class _StateOneWidgetState extends State<StateOneWidget> {
-  String t1 = "دخل", t2 = "خرج", t3 = "التالي";
+  String t1 = "دخل", t2 = "صرف", t3 = "التالي";
   String selected = "دخل";
   int index = -1;
   List<Transaction> transaction = [];
@@ -147,7 +147,7 @@ class _StateOneWidgetState extends State<StateOneWidget> {
         ),
         SpacingHelper.h2,
         SizedBox(
-          height: 50,
+          height: 40,
           width: SizesHelper.mainTileWidth(context),
           child: index == -1
               ? const SizedBox()

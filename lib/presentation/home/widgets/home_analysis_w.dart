@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/core/helpers/localization/app_localization.dart';
+import 'package:my_wallet/core/helpers/styles/borders_h.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
+import 'package:my_wallet/core/helpers/styles/radius_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
 import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/core/widgets/indecators/categories_circular_indicator_widget.dart';
@@ -11,22 +13,26 @@ class HomeAnalysisWidget extends StatelessWidget {
   const HomeAnalysisWidget({
     super.key,
     required this.transactions,
-
   });
   final List<Transaction> transactions;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 200,
+      padding: const EdgeInsets.all(12.0),
       width: SizesHelper.mainTileWidth(context),
+      decoration: BoxDecoration(
+        border: BordersHelper.b1,
+        borderRadius: RadiusHelper.r2,
+      ),
       child: CategoriesCircularIndicatorWidget(
         transaction: transactions,
-      
       ),
     );
   }
 }
+
 class TransactionsListWidget extends StatefulWidget {
   const TransactionsListWidget(
       {super.key, required this.transactions, required this.categoriesAmounts});

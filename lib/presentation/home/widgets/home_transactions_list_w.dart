@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_wallet/core/helpers/styles/colors_h.dart';
 import 'package:my_wallet/core/helpers/styles/dividers_helper.dart';
 import 'package:my_wallet/core/helpers/styles/fonts_h.dart';
+import 'package:my_wallet/core/helpers/styles/radius_h.dart';
 import 'package:my_wallet/core/helpers/styles/sizes_h.dart';
-import 'package:my_wallet/features/transactions/domain/entities/expense.dart';
-import 'package:my_wallet/features/transactions/domain/entities/income.dart';
+import 'package:my_wallet/core/helpers/styles/spacing_h.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 import 'package:my_wallet/presentation/home/state/home/home_cubit.dart';
 import 'package:my_wallet/presentation/home/widgets/transaction_w.dart';
@@ -14,8 +14,10 @@ class HomeTransactionsListWidget extends StatefulWidget {
   const HomeTransactionsListWidget({
     super.key,
     required this.transactions,
+    required this.currentType,
   });
   final List<Transaction> transactions;
+  final TransactionType currentType;
 
   @override
   State<HomeTransactionsListWidget> createState() =>
@@ -24,11 +26,7 @@ class HomeTransactionsListWidget extends StatefulWidget {
 
 class _HomeTransactionsListWidgetState
     extends State<HomeTransactionsListWidget> {
-  // widget size
-  Size? size;
   List<Widget> list = [];
-  bool showIncome = true;
-  int selectedIndex = 0;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -42,8 +40,12 @@ class _HomeTransactionsListWidgetState
     for (var element in widget.transactions) {
       list.add(TransactionWidget(
         transaction: element,
+        onLongPress: (t) {
+          context.read<HomeCubit>().deleteTransaction(t);
+        },
       ));
     }
+    list.add(const SizedBox(height: 60));
     setState(() {});
   }
 
@@ -63,52 +65,36 @@ class _HomeTransactionsListWidgetState
         child: Column(
           children: [
             SizedBox(
-              height: 75,
+              height: 55,
               child: Row(
                 children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: showIncomeList,
-                      // color: Colors.cyan,
-                      child: Center(
-                        child: Text(
-                          "سجلات الدخل",
-                          style: FontsStylesHelper.textStyle14.copyWith(
-                            color: widget.transactions.runtimeType ==
-                                    (List<Income>)
-                                ? ColorsHelper.green
-                                : ColorsHelper.text2,
-                          ),
-                        ),
-                      ),
-                    ),
+                  ItemWidget(
+                    onTap: showIncomeList,
+                    selected: widget.currentType == TransactionType.income,
+                    color: ColorsHelper.green,
+                    title: "سجلات الدخل",
                   ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: showExpenseList,
-                      // color: Colors.orange,
-                      child: Center(
-                        child: Text(
-                          "سجلات الصرف",
-                          style: FontsStylesHelper.textStyle14.copyWith(
-                              color: widget.transactions.runtimeType ==
-                                      (List<Expense>)
-                                  ? ColorsHelper.red
-                                  : ColorsHelper.text2),
-                        ),
-                      ),
-                    ),
-                  )
+                  ItemWidget(
+                    onTap: showExpenseList,
+                    selected: widget.currentType == TransactionType.expense,
+                    color: ColorsHelper.red,
+                    title: "سجلات الصرف",
+                  ),
                 ],
               ),
             ),
+            Row(
+              children: [
+                DividerHelper.h1,
+              ],
+            ),
+            SpacingHelper.h1,
             DividerHelper.h1,
             Expanded(
               child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 12),
-                  children: list),
+                physics: const BouncingScrollPhysics(),
+                children: list,
+              ),
             ),
           ],
         ),
@@ -121,5 +107,38 @@ class _HomeTransactionsListWidgetState
     initList();
     setState(() {});
     super.didUpdateWidget(oldWidget);
+  }
+}
+
+class ItemWidget extends StatelessWidget {
+  const ItemWidget({
+    super.key,
+    required this.onTap,
+    required this.selected,
+    required this.color,
+    required this.title,
+  });
+  final VoidCallback onTap;
+  final bool selected;
+  final Color color;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        onLongPress: onTap,
+        borderRadius: RadiusHelper.r2,
+        child: Align(
+          alignment: const Alignment(0, 0.25),
+          child: Text(
+            title,
+            style: FontsStylesHelper.textStyle14.copyWith(
+                color: selected ? color : ColorsHelper.text2,
+                fontWeight: selected ? FontWeight.bold : FontWeight.normal),
+          ),
+        ),
+      ),
+    );
   }
 }

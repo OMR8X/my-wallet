@@ -1,9 +1,9 @@
-
 import 'package:my_wallet/features/transactions/data/data_sources/styles.dart';
 import 'package:my_wallet/features/transactions/domain/entities/transaction.dart';
 
 class TransactionModel extends Transaction {
-  TransactionModel({    required super.id,
+  TransactionModel({
+    required super.id,
     required super.category,
     required super.transStyle,
     required super.date,
@@ -30,7 +30,7 @@ class TransactionModel extends Transaction {
       amount: t.amount,
     );
   }
-  Map toJson() {
+  Map<String, Object?> toJson() {
     return {
       "id": id,
       "category": category,

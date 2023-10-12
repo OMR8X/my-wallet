@@ -40,7 +40,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     }
     return (e, i);
   }
-  
+
   @override
   Future<List<Transaction>> getRecentTransactions() async {
     int d, m, y;
@@ -66,9 +66,10 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<void> addTransaction(t) async {
     var model = TransactionModel.fromObject(t).toJson();
+    model.remove("id");
     await database.insert(
       t.runtimeType == Expense ? expensesTable : incomesTable,
-      model as Map<String, Object?>,
+      model,
     );
     return;
   }
@@ -76,9 +77,10 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<void> deleteTransaction(Transaction t) async {
     await database.delete(
-        t.runtimeType == Expense ? expensesTable : incomesTable,
-        where: "id = ?",
-        whereArgs: [t.id]);
+      t is Expense ? expensesTable : incomesTable,
+      where: "id = ?",
+      whereArgs: [t.id],
+    );
     return;
   }
 
@@ -98,6 +100,8 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     List<Map> models = await database.query(expensesTable);
     List<Expense> expenses = [];
     expenses = models.map<Expense>((e) => ExpenseModel.fromJson(e)).toList();
+    expenses.sort((a, b) => b.date.compareTo(a.date));
+    expenses.reversed;
     return expenses;
   }
 
@@ -106,6 +110,8 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     List<Map> models = await database.query(incomesTable);
     List<Income> incomes = [];
     incomes = models.map<Income>((e) => IncomeModel.fromJson(e)).toList();
+    incomes.sort((a, b) => b.date.compareTo(a.date));
+    incomes.reversed;
     return incomes;
   }
 
@@ -113,7 +119,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     List<Transaction> transactions = [];
     transactions += await getAllExpenses();
     transactions += await getAllIncomes();
-    transactions.sort((a, b) => a.date.compareTo(b.date));
+    transactions.sort((a, b) => b.date.compareTo(a.date));
     return transactions;
   }
 }
